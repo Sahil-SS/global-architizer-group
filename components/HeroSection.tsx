@@ -9,17 +9,20 @@ export default function HeroSection() {
       {/* ✅ Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-bg.jpg" // your image in public/images/hero-bg.jpg
+          src="/images/hero-bg.jpg" // your hero background
           alt="Luxury Real Estate Background"
           fill
           priority
           quality={100}
-          className="object-cover object-center opacity-40"
+          className="object-cover object-center opacity-70"
         />
       </div>
 
-      {/* ✅ Dark Overlay */}
-      <div className="absolute inset-0 "></div>
+      {/* ✅ Overlay Tint */}
+      <div className="absolute inset-0 bg-black/60"></div>
+
+      {/* ✅ Bottom Fade Effect (same as About Page) */}
+      <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent pointer-events-none"></div>
 
       {/* ✅ Text Content */}
       <motion.div
@@ -28,7 +31,7 @@ export default function HeroSection() {
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="relative z-10 text-center px-6"
       >
-        {/* Subheading (in italics, elegant gold) */}
+        {/* Subheading */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -59,7 +62,7 @@ export default function HeroSection() {
           property tells its own story of elegance and timeless design.
         </motion.p>
 
-        {/* Call to Action */}
+        {/* CTA Button */}
         <motion.a
           href="#properties"
           whileHover={{
