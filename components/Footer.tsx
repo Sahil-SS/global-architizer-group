@@ -130,10 +130,12 @@ export default function Footer() {
 
           <h3 className="text-[#E0B973] text-lg font-semibold mb-3">Pages</h3>
           <ul className="text-gray-400 text-sm space-y-2">
-            {["Home", "About Us", "Portfolio", "Contact"].map((page) => (
+            {["Home", "About", "Portfolio", "Contact"].map((page) => (
               <li key={page}>
                 <Link
-                  href={`/${page === "Home" ? "" : page.toLowerCase().replace(" ", "")}`}
+                  href={`/${
+                    page === "Home" ? "" : page.toLowerCase().replace(" ", "")
+                  }`}
                   className="hover:text-[#E0B973] transition-colors duration-300"
                 >
                   {page}
@@ -146,7 +148,8 @@ export default function Footer() {
 
       {/* Footer Bottom */}
       <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-center text-gray-500 text-xs">
-        © {new Date().getFullYear()} Global Architizer Group. All Rights Reserved.
+        © {new Date().getFullYear()} Global Architizer Group. All Rights
+        Reserved.
       </div>
     </footer>
   );
