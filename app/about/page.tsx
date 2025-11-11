@@ -258,7 +258,7 @@ export default function AboutPage() {
             {/* Signature */}
             <div className="mt-10">
               <Image
-                src="/logo.png"
+                src="/signature.png"
                 alt="Signature"
                 width={160}
                 height={50}
