@@ -36,11 +36,20 @@ export default function PortfolioPage() {
     },
   ];
 
+  // 📜 Scroll Down Function
+  const scrollToNextSection = () => {
+    const nextSection = document.getElementById("intro-section");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <main className="bg-[#0A0A0A] text-white">
       <Navbar />
+
       {/* 🌆 HERO SECTION */}
-      <section className="relative h-[100vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Background Image */}
         <Image
           src="/images/hero-bg.jpg"
@@ -50,31 +59,62 @@ export default function PortfolioPage() {
           priority
         />
 
-        {/* Overlay for dark tint */}
-        <div className="absolute inset-0 bg-black/60" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60"></div>
 
-        {/* ✨ Bottom Fade (the key blend effect) */}
+        {/* Bottom Fade */}
         <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent pointer-events-none"></div>
 
         {/* Text Content */}
-        <div className="relative z-10 text-center">
-          <h1 className="text-[#E0B973] text-4xl md:text-6xl font-semibold uppercase mb-4">
-            Our Projects
-          </h1>
-
-          {/* Down Arrow */}
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex justify-center mt-6"
+        <div className="relative z-10 px-6">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 1 }}
+            className="text-[#E0B973] italic text-lg md:text-xl mb-4 tracking-wide"
           >
-            <ChevronDown className="text-[#E0B973] w-8 h-8" />
-          </motion.div>
+            Crafting Excellence. Shaping Skylines.
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className="text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
+          >
+            Our Portfolio of <br />
+            <span className="text-[#E0B973]">Visionary Developments</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 1 }}
+            className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+          >
+            From luxurious high-rises to serene beachfront villas — explore the
+            defining projects that set new standards of design, innovation, and
+            craftsmanship in the UAE.
+          </motion.p>
         </div>
+
+        {/* Animated Scroll Arrow */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="absolute bottom-12 cursor-pointer z-10"
+          onClick={scrollToNextSection}
+        >
+          <ChevronDown className="text-[#E0B973] w-10 h-10" />
+          <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />
+        </motion.div>
       </section>
 
       {/* 🏗 INTRO TEXT */}
-      <section className="pt-4 pb-20 px-6 lg:px-20 text-center max-w-5xl mx-auto">
+      <section
+        id="intro-section"
+        className="pt-4 pb-20 px-6 lg:px-20 text-center max-w-5xl mx-auto"
+      >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -99,30 +139,43 @@ export default function PortfolioPage() {
       </section>
 
       {/* 📊 METRICS SECTION */}
-      <section className="py-12 border-y border-[#1f1f1f] bg-[#121212]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+      <section className="py-20 bg-[#0A0A0A] text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-0 text-center md:text-left px-6"
+        >
           {metrics.map((metric, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="flex flex-col items-center md:items-start relative px-4"
+              whileHover={{ y: -4 }}
+              transition={{ type: "spring", stiffness: 200, damping: 12 }}
+              className="relative flex flex-col items-center md:items-start"
             >
-              <h3 className="text-[#E0B973] text-4xl font-semibold">
+              {/* Metric Number */}
+              <h3 className="text-[#E0B973] text-5xl md:text-6xl font-semibold mb-2 tracking-tight">
                 {metric.number}
               </h3>
-              <p className="text-gray-400 text-sm uppercase tracking-wider mt-1">
+
+              {/* Thin Gold Underline */}
+              <div className="w-12 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mb-3 opacity-70" />
+
+              {/* Label */}
+              <p className="text-gray-400 text-xs md:text-sm uppercase tracking-[0.2em]">
                 {metric.label}
               </p>
 
-              {/* Golden Divider Line (between metrics on desktop) */}
+              {/* Divider Line Between Items */}
               {index !== metrics.length - 1 && (
-                <div className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1px] h-12 bg-[#2a2a2a]" />
+                <div className="hidden md:block absolute right-[-40px] top-1/2 -translate-y-1/2 w-px h-12 bg-[#2a2a2a]" />
               )}
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Bottom Accent Line */}
+        <div className="mt-12 mx-auto w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973]/80 to-transparent opacity-60" />
       </section>
 
       {/* 🏢 PROJECTS SECTION */}
@@ -145,7 +198,6 @@ export default function PortfolioPage() {
               transition={{ duration: 1 }}
               className="flex flex-col items-center text-center"
             >
-              {/* Image */}
               <div className="w-full overflow-hidden rounded-2xl border border-[#1f1f1f] hover:border-[#E0B973] transition-all duration-500">
                 <Image
                   src={project.image}
@@ -156,7 +208,6 @@ export default function PortfolioPage() {
                 />
               </div>
 
-              {/* Details */}
               <div className="mt-8 max-w-3xl">
                 <h3 className="text-2xl text-[#E0B973] font-semibold mb-2 uppercase">
                   {project.title}
@@ -170,6 +221,7 @@ export default function PortfolioPage() {
           ))}
         </div>
       </section>
+
       <Footer />
       <ScrollToTop />
     </main>

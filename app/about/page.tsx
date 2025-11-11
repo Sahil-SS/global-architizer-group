@@ -15,11 +15,20 @@ export default function AboutPage() {
     { number: "25+", label: "Ongoing Projects" },
   ];
 
+  // 👇 Smooth scroll handler for the arrow
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <main className="bg-[#0A0A0A] text-white">
-        <Navbar />
+      <Navbar />
+
       {/* 🌆 HERO SECTION */}
-      <section className="relative h-[100vh] w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-[100vh] w-full flex flex-col items-center justify-center overflow-hidden text-center">
         {/* Background Image */}
         <Image
           src="/images/hero-bg.jpg"
@@ -36,20 +45,39 @@ export default function AboutPage() {
         <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent pointer-events-none"></div>
 
         {/* Text Content */}
-        <div className="relative z-10 text-center">
-          <h1 className="text-4xl md:text-6xl font-semibold text-[#E0B973] mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative z-10 px-6"
+        >
+          <h1 className="text-4xl md:text-6xl font-semibold text-[#E0B973] mb-4 uppercase tracking-wide">
             About Global Architizer Group
           </h1>
 
-          {/* Down Arrow */}
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="flex justify-center mt-6"
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed"
           >
-            <ChevronDown className="text-[#E0B973] w-8 h-8" />
-          </motion.div>
-        </div>
+            We are creators of timeless architecture — redefining luxury through
+            innovative design, craftsmanship, and vision.
+            <br className="hidden md:block" />
+            Our legacy lies in every detail we build, every skyline we shape.
+          </motion.p>
+        </motion.div>
+
+        {/* ⬇️ Animated Down Arrow */}
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+          onClick={handleScrollDown}
+        >
+          <ChevronDown className="text-[#E0B973] w-10 h-10 hover:scale-110 transition-transform duration-300" />
+          <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />
+        </motion.div>
       </section>
 
       {/* 🏛 INTRODUCTION */}
@@ -89,32 +117,50 @@ export default function AboutPage() {
         </motion.div>
       </section>
 
-      {/* 📊 METRICS */}
-      <section className="py-16 bg-[#121212]">
+      {/* 📊 METRICS – Royal Minimalist Layout */}
+      <section className="relative py-24 bg-[#0A0A0A] text-white overflow-hidden">
+        {/* Subtle Gold Glow Overlay */}
+        <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#E0B973]/5 to-transparent pointer-events-none"></div>
+
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 text-center"
+          className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-center items-center gap-12 px-6 text-center relative"
         >
           {metrics.map((metric, i) => (
             <motion.div
               key={i}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 0 15px rgba(224,185,115,0.3)",
-              }}
-              className="bg-[#0A0A0A] p-8 rounded-xl border border-[#1f1f1f] hover:border-[#E0B973] transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: i * 0.2 }}
+              className="relative flex flex-col items-center justify-center"
             >
-              <h3 className="text-[#E0B973] text-4xl font-semibold mb-2">
+              {/* Number with Elegant Glow */}
+              <h3 className="text-[#E0B973] text-6xl md:text-7xl font-semibold tracking-tight drop-shadow-[0_0_8px_rgba(224,185,115,0.25)]">
                 {metric.number}
               </h3>
-              <p className="text-gray-400 uppercase text-sm tracking-wider">
+
+              {/* Label with Gold Accent Underline */}
+              <p className="text-gray-300 text-sm uppercase tracking-[0.3em] mt-4 relative after:content-[''] after:block after:w-8 after:h-0.5 after:bg-[#E0B973] after:mx-auto after:mt-3 after:opacity-60">
                 {metric.label}
               </p>
+
+              {/* Divider Between Metrics */}
+              {i !== metrics.length - 1 && (
+                <div className="hidden sm:block absolute -right-24 top-1/2 -translate-y-1/2 w-20 h-px bg-linear-to-r from-[#E0B973]/60 to-transparent" />
+              )}
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Bottom Accent Line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="w-32 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mt-20 opacity-70 origin-center"
+        />
       </section>
 
       {/* 🏠 PROPERTY GALLERY */}
@@ -149,70 +195,83 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 👥 LEADERSHIP CARD */}
-      <section className="py-20 bg-[#121212] px-6 lg:px-20">
-        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-          {/* Left - Team Image */}
+      {/* 👥 LEADERSHIP SECTION */}
+      <section className="relative bg-[#0A0A0A] text-white py-24 px-6 lg:px-20">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+        >
+          Our Leadership
+        </motion.h2>
+
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+          {/* LEFT - IMAGE */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="flex-1 flex justify-center"
+            className="flex-1 w-full rounded-2xl overflow-hidden shadow-lg"
           >
             <Image
-              src="/images/team.jpg"
-              alt="Our Team"
-              width={500}
-              height={400}
-              className="rounded-2xl object-cover"
+              src="/images/hero-bg.jpg"
+              alt="Our Leadership"
+              width={600}
+              height={500}
+              className="object-cover w-full h-[420px] lg:h-[500px] rounded-2xl"
             />
           </motion.div>
 
-          {/* Right - Text */}
+          {/* RIGHT - TEXT CONTENT */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             className="flex-1"
           >
-            <p className="text-gray-300 italic text-xl mb-6">
+            {/* Quote */}
+            <p className="text-[#E0B973] italic text-lg md:text-xl mb-8 leading-relaxed text-center lg:text-left">
               “The function of leadership is to produce more leaders, not more
               followers.”
             </p>
 
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            {/* Description */}
+            <p className="text-gray-300 text-lg leading-relaxed mb-6">
               At{" "}
               <span className="text-[#E0B973] font-semibold">
                 GAG Developments
               </span>
-              , our mission is clear: bridge the gap between investors and the
-              most lucrative opportunities in the real estate landscape. We’re
-              dedicated to maximizing returns on investment (ROI) by providing
-              tailored guidance and in-depth market insights.
+              , our mission is clear: to bridge the gap between investors and
+              the most lucrative opportunities in the real estate landscape. We
+              are dedicated to maximizing returns on investment (ROI) through
+              tailored strategies, market insights, and unmatched execution.
             </p>
 
-            <p className="text-gray-400 text-lg leading-relaxed mb-8">
+            <p className="text-gray-400 text-lg leading-relaxed mb-10">
               With our personalized approach, we empower clients to navigate the
-              dynamic real estate market effectively, ensuring they capitalize
-              on the best investments available.
+              dynamic real estate market effectively, ensuring every project we
+              deliver stands for design excellence, innovation, and long-term
+              value.
             </p>
 
             {/* Signature */}
-            <div className="mt-8">
+            <div className="mt-10">
               <Image
-                src="/images/signature.png"
+                src="/logo.png"
                 alt="Signature"
-                width={150}
+                width={160}
                 height={50}
                 className="opacity-80"
               />
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-gray-500 mt-2 tracking-wider">
                 — Founder, Global Architizer Group
               </p>
             </div>
           </motion.div>
         </div>
       </section>
+
       <Footer />
       <ScrollToTop />
     </main>

@@ -2,14 +2,23 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 export default function HeroSection() {
+  // 👇 Function to scroll smoothly to next section
+  const handleScrollDown = () => {
+    window.scrollTo({
+      top: window.innerHeight, // scroll down by one viewport height
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="relative flex items-center justify-center h-screen w-full bg-black overflow-hidden">
       {/* ✅ Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-bg.jpg" // your hero background
+          src="/images/hero-bg.jpg"
           alt="Luxury Real Estate Background"
           fill
           priority
@@ -21,7 +30,7 @@ export default function HeroSection() {
       {/* ✅ Overlay Tint */}
       <div className="absolute inset-0 bg-black/60"></div>
 
-      {/* ✅ Bottom Fade Effect (same as About Page) */}
+      {/* ✅ Bottom Fade Effect */}
       <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent pointer-events-none"></div>
 
       {/* ✅ Text Content */}
@@ -75,6 +84,17 @@ export default function HeroSection() {
         >
           Explore Properties
         </motion.a>
+      </motion.div>
+
+      {/* ⬇️ Animated Down Arrow */}
+      <motion.div
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 1.5 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20"
+        onClick={handleScrollDown}
+      >
+        <ChevronDown className="text-[#E0B973] w-10 h-10 hover:scale-110 transition-transform duration-300" />
+        <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />
       </motion.div>
     </section>
   );

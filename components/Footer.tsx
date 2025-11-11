@@ -130,7 +130,7 @@ export default function Footer() {
 
           <h3 className="text-[#E0B973] text-lg font-semibold mb-3">Pages</h3>
           <ul className="text-gray-400 text-sm space-y-2">
-            {["Home", "About", "Portfolio", "Contact"].map((page) => (
+            {["Home", "About", "Portfolio","Gallery" , "Contact"].map((page) => (
               <li key={page}>
                 <Link
                   href={`/${
