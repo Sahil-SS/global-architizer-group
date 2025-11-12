@@ -3,12 +3,35 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, Phone, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#0A0A0A] text-white py-16 border-t border-[#1f1f1f]">
-      <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="relative text-white py-16 border-t border-[#1f1f1f] overflow-hidden">
+      {/* 🖼️ Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/footer-bg.jpg" // 🔸 Replace with your image path
+          alt="Luxury architectural background"
+          fill
+          priority
+          quality={90}
+          className="object-cover object-center opacity-80"
+        />
+      </div>
+
+      {/* 🖤 Overlay for readability */}
+      <div className="absolute inset-0 bg-black/75" />
+
+      {/* 🌌 Smooth Fade Effect — blends footer image with black section above */}
+      <div className="absolute top-0 left-0 w-full h-56 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent pointer-events-none" />
+
+      {/* ✨ Subtle Gold Glow Accent */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(224,185,115,0.05)_0%,transparent_70%)] opacity-40" />
+
+      {/* 🔹 Main Footer Content */}
+      <div className="container mx-auto px-6 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
         {/* 🏢 Company Info */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -19,26 +42,41 @@ export default function Footer() {
             <Image
               src="/logo.png"
               alt="Global Architizer Group Logo"
-              width={120}
-              height={60}
+              width={220}
+              height={100}
               className="object-contain"
             />
           </div>
-          <p className="text-gray-400 text-sm leading-relaxed mb-6">
+          <p className="text-gray-300 text-sm leading-relaxed mb-6">
             Building excellence across India — from innovative architecture to
             world-class construction, delivering luxury, precision, and trust.
           </p>
 
           {/* 🌐 Social Links */}
-          <div className="flex space-x-4 mt-4">
-            <Link href="https://facebook.com" target="_blank">
-              <Facebook className="w-5 h-5 text-gray-400 hover:text-[#E0B973] transition-all duration-300" />
+          <div className="flex space-x-5 mt-4">
+            <Link
+              href="https://facebook.com"
+              target="_blank"
+              aria-label="Facebook"
+              className="hover:scale-110 transition-transform duration-300"
+            >
+              <FaFacebook className="w-6 h-6 text-[#1877F2]" />
             </Link>
-            <Link href="https://instagram.com" target="_blank">
-              <Instagram className="w-5 h-5 text-gray-400 hover:text-[#E0B973] transition-all duration-300" />
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+              className="hover:scale-110 transition-transform duration-300"
+            >
+              <FaInstagram className="w-6 h-6 text-[#E4405F]" />
             </Link>
-            <Link href="https://linkedin.com" target="_blank">
-              <Linkedin className="w-5 h-5 text-gray-400 hover:text-[#E0B973] transition-all duration-300" />
+            <Link
+              href="https://linkedin.com"
+              target="_blank"
+              aria-label="LinkedIn"
+              className="hover:scale-110 transition-transform duration-300"
+            >
+              <FaLinkedin className="w-6 h-6 text-[#0A66C2]" />
             </Link>
           </div>
         </motion.div>
@@ -52,8 +90,7 @@ export default function Footer() {
           <h3 className="text-[#E0B973] text-lg font-semibold mb-4">
             Our Offices
           </h3>
-
-          <div className="space-y-4 text-sm text-gray-400">
+          <div className="space-y-4 text-sm text-gray-300">
             <div>
               <p className="font-semibold text-white">KOLKATA</p>
               <p>RDB Boulevard, Salt Lake, Sec V.</p>
@@ -87,7 +124,7 @@ export default function Footer() {
           <h3 className="text-[#E0B973] text-lg font-semibold mb-4">
             Contact Us
           </h3>
-          <div className="text-gray-400 text-sm space-y-3">
+          <div className="text-gray-300 text-sm space-y-3">
             <div className="flex items-start space-x-3">
               <Mail className="w-4 h-4 text-[#E0B973] mt-0.5" />
               <span>info@globalarchitizergroup.com</span>
@@ -114,7 +151,7 @@ export default function Footer() {
             <input
               type="email"
               placeholder="Your Email"
-              className="bg-[#121212] border border-[#2a2a2a] text-gray-300 text-sm px-4 py-2 rounded-md focus:outline-none focus:border-[#E0B973]"
+              className="bg-[#1a1a1a]/70 border border-[#2a2a2a] text-gray-200 text-sm px-4 py-2 rounded-md focus:outline-none focus:border-[#E0B973]"
             />
             <motion.button
               whileHover={{
@@ -129,8 +166,8 @@ export default function Footer() {
           </form>
 
           <h3 className="text-[#E0B973] text-lg font-semibold mb-3">Pages</h3>
-          <ul className="text-gray-400 text-sm space-y-2">
-            {["Home", "About", "Portfolio","Gallery" , "Contact"].map((page) => (
+          <ul className="text-gray-300 text-sm space-y-2">
+            {["Home", "About", "Portfolio", "Gallery", "Contact"].map((page) => (
               <li key={page}>
                 <Link
                   href={`/${
@@ -147,9 +184,8 @@ export default function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="border-t border-[#1f1f1f] mt-16 pt-6 text-center text-gray-500 text-xs">
-        © {new Date().getFullYear()} Global Architizer Group. All Rights
-        Reserved.
+      <div className="border-t border-[#2a2a2a]/70 mt-16 pt-6 text-center text-gray-400 text-xs relative z-10">
+        © {new Date().getFullYear()} Global Architizer Group. All Rights Reserved.
       </div>
     </footer>
   );

@@ -11,7 +11,6 @@ export default function AboutSection() {
     { number: "25+", label: "Ongoing Projects" },
   ];
 
-  // ✅ Properly typed animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,9 +29,12 @@ export default function AboutSection() {
   };
 
   return (
-    <section className="relative w-full py-20 bg-[#0A0A0A] text-white overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-20">
-        {/* ✅ About Us Heading at Top */}
+    <section className="relative w-full py-20 bg-[#0E0E0E] text-white overflow-hidden">
+      {/* ✨ Subtle radial gold texture for elegance */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(224,185,115,0.05)_0%,transparent_70%)] opacity-40 pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        {/* 🏗️ Section Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +44,7 @@ export default function AboutSection() {
           About Us
         </motion.h2>
 
-        {/* Main Content */}
+        {/* 🧱 Main Content */}
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left Side: Image */}
           <motion.div
@@ -52,11 +54,11 @@ export default function AboutSection() {
             className="flex-1 flex justify-center"
           >
             <Image
-              src="/images/hero-bg.jpg" // 🖼️ Replace with your team picture (preferably black & white)
+              src="/images/hero-bg.jpg"
               alt="Our Team"
               width={500}
               height={500}
-              className="rounded-2xl object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              className="rounded-2xl object-cover grayscale hover:grayscale-0 transition-all duration-500 shadow-[0_0_30px_rgba(0,0,0,0.4)]"
             />
           </motion.div>
 
@@ -68,20 +70,18 @@ export default function AboutSection() {
             className="flex-1"
           >
             <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8 max-w-xl">
-              At <span className="text-[#E0B973]">Global Architizer Group</span> we
-              simplify the design and build process. With experts in architecture,
-              interior design, and construction all in-house, we deliver amazing
-              projects fast, to the highest quality, cost-effectively, and seamlessly
-              in Kolkata and across India.
+              At <span className="text-[#E0B973]">Global Architizer Group</span>,
+              we simplify the design and build process. With experts in
+              architecture, interior design, and construction all in-house,
+              we deliver projects that blend speed, precision, and elegance —
+              across Kolkata and India.
               <br />
               <br />
-              Our Design and Construction team, supported by amazing Customer Support,
-              uses the latest technologies to ensure the best possible project for you.
-              Even while working with renowned clients, our firm is proven to deliver
-              excellence at every step.
+              Our in-house team of architects, engineers, and project managers
+              ensures every detail is executed to perfection — bringing
+              world-class design and innovation to life for every client.
             </p>
 
-            {/* Learn More Button */}
             <Link href="/about">
               <motion.button
                 whileHover={{
@@ -97,7 +97,7 @@ export default function AboutSection() {
           </motion.div>
         </div>
 
-        {/* ✅ Bottom: Animated Metrics (with cards) */}
+        {/* 📊 Bottom Metrics */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -107,15 +107,15 @@ export default function AboutSection() {
           {metrics.map((item, index) => (
             <motion.div
               key={index}
-              variants={itemVariants} // ✅ works perfectly now
+              variants={itemVariants}
               whileHover={{
                 scale: 1.05,
                 y: -5,
-                boxShadow: "0 0 20px rgba(224, 185, 115, 0.25)",
+                boxShadow: "0 0 20px rgba(224,185,115,0.25)",
                 borderColor: "#E0B973",
               }}
               transition={{ type: "spring", stiffness: 200, damping: 10 }}
-              className="bg-[#121212] border border-[#2a2a2a] rounded-2xl p-8 transition-all duration-300 cursor-pointer"
+              className="bg-[#141414] border border-[#2a2a2a] rounded-2xl p-8 transition-all duration-300 cursor-pointer"
             >
               <h3 className="text-[#E0B973] text-4xl font-semibold mb-3 transition-all duration-300">
                 {item.number}

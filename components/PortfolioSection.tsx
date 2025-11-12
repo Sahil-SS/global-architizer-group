@@ -33,25 +33,36 @@ export default function PortfolioSection() {
   ];
 
   return (
-    <section className="relative w-full py-24 bg-[#0A0A0A] text-white overflow-hidden">
-      <div className="container mx-auto px-6 lg:px-20">
-        {/* Section Heading */}
+    <section className="relative w-full py-24 bg-[#0E0E0E] text-white overflow-hidden">
+      {/* 🌅 Fade Transitions to Blend with Black Sections */}
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent pointer-events-none" />
+
+      {/* ✨ Subtle Gold Radial Glow Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(224,185,115,0.05)_0%,transparent_70%)] opacity-40 pointer-events-none" />
+
+      <div className="container mx-auto px-6 lg:px-20 relative z-10">
+        {/* 🏗️ Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase mb-4">
+          <h2 className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase mb-4">
             Portfolio
           </h2>
+
+          {/* ✨ Accent Line Under Heading */}
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mb-6 opacity-70" />
+
           <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             A glimpse into our finest architectural and interior masterpieces —
             where design meets precision and craftsmanship defines luxury.
           </p>
         </motion.div>
 
-        {/* Portfolio Grid */}
+        {/* 🖼️ Portfolio Grid */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -61,9 +72,14 @@ export default function PortfolioSection() {
           {projects.map((project, index) => (
             <Link key={index} href="/portfolio">
               <motion.div
-                whileHover={{ scale: 1.02 }}
+                whileHover={{
+                  scale: 1.03,
+                  y: -5,
+                  boxShadow: "0 0 25px rgba(224,185,115,0.15)",
+                  borderColor: "#E0B973",
+                }}
                 transition={{ type: "spring", stiffness: 200, damping: 12 }}
-                className="relative group overflow-hidden rounded-2xl border border-[#1f1f1f] hover:border-[#E0B973] transition-all duration-500"
+                className="relative group overflow-hidden rounded-2xl border border-[#1f1f1f] bg-[#141414] transition-all duration-500"
               >
                 {/* Image */}
                 <Image
@@ -75,7 +91,7 @@ export default function PortfolioSection() {
                 />
 
                 {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-60 transition-all duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-80 group-hover:opacity-60 transition-all duration-500"></div>
 
                 {/* Text Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
@@ -91,7 +107,7 @@ export default function PortfolioSection() {
           ))}
         </motion.div>
 
-        {/* View All Button */}
+        {/* 💫 View All Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

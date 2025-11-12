@@ -5,19 +5,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import EnquireNowButton from "@/components/EnquireNowButton"; 
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(true);
 
-  // 🧠 Show only when at top
+  // 🧠 Show navbar only when at top
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY <= 50) setVisible(true);
       else setVisible(false);
     };
-
-    handleScroll(); // run on mount
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -47,7 +47,7 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }} // smoother easing curve
+            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
             className="fixed top-0 left-0 w-full z-50 flex items-center justify-between 
                        px-8 md:px-16 py-4 bg-transparent backdrop-blur-0 transition-all duration-500"
           >
@@ -77,8 +77,8 @@ export default function Navbar() {
                   <Image
                     src="/logo.png"
                     alt="Company Logo"
-                    width={160}
-                    height={70}
+                    width={200}
+                    height={90}
                     priority
                     className="object-contain"
                   />
@@ -127,6 +127,7 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Dark overlay */}
             <motion.div
               key="overlay"
               initial={{ opacity: 0 }}
@@ -137,6 +138,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             />
 
+            {/* Sidebar */}
             <motion.div
               key="sidebar"
               initial={{ x: "100%" }}
@@ -176,6 +178,20 @@ export default function Navbar() {
               </div>
             </motion.div>
           </>
+        )}
+      </AnimatePresence>
+
+      {/* 🟡 Enquire Now Button — hidden when sidebar open */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <EnquireNowButton />
+          </motion.div>
         )}
       </AnimatePresence>
     </>

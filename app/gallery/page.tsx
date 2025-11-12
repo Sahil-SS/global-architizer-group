@@ -8,7 +8,6 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { ChevronDown } from "lucide-react";
 
 export default function GalleryPage() {
-  // Balanced and symmetrical gallery layout
   const galleryImages = [
     { src: "/images/gallery1.jpg" },
     { src: "/images/gallery2.jpg" },
@@ -21,8 +20,14 @@ export default function GalleryPage() {
     { src: "/images/gallery9.jpg" },
   ];
 
+  const galleryVideos = [
+    { src: "/videos/gallery1.mp4", title: "Luxury Villa" },
+    { src: "/videos/gallery2.mp4", title: "Modern Office Space" },
+    { src: "/videos/gallery3.mp4", title: "Architectural Showcase" },
+  ];
+
   const scrollToGallery = () => {
-    const section = document.getElementById("gallery-grid");
+    const section = document.getElementById("photo-gallery");
     if (section) section.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -32,7 +37,6 @@ export default function GalleryPage() {
 
       {/* 🌆 HERO SECTION */}
       <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src="/images/hero-bg.jpg"
@@ -43,12 +47,10 @@ export default function GalleryPage() {
           />
         </div>
 
-        {/* Overlay Layers */}
         <div className="absolute inset-0 bg-black/70" />
         <div className="absolute inset-0 bg-gradient-to-tr from-[#E0B973]/10 via-transparent to-transparent" />
         <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent" />
 
-        {/* Hero Content */}
         <div className="relative z-10 px-6">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -75,12 +77,11 @@ export default function GalleryPage() {
             transition={{ delay: 0.8, duration: 1 }}
             className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Discover timeless spaces that merge creativity and structure —  
-            a symphony of luxury, precision, and emotion.
+            Discover timeless spaces that merge creativity and structure — a
+            symphony of luxury, precision, and emotion.
           </motion.p>
         </div>
 
-        {/* Animated Scroll Arrow */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
@@ -88,29 +89,26 @@ export default function GalleryPage() {
           className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer z-10 group"
         >
           <ChevronDown className="text-[#E0B973] w-10 h-10 group-hover:text-[#ffd67e] transition-colors duration-300" />
-          <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />  
+          <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />
         </motion.div>
       </section>
 
-      {/* 🖼️ SYMMETRICAL GALLERY SECTION */}
+      {/* 🖼️ PHOTO GALLERY */}
       <section
-        id="gallery-grid"
+        id="photo-gallery"
         className="py-24 px-6 lg:px-20 max-w-7xl mx-auto relative"
       >
-        {/* Section Heading */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
           className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
         >
-          <span className="italic">Our Design Gallery</span>
+          <span className="italic">Photo Gallery</span>
         </motion.h2>
 
-        {/* Gradient Background Accent */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(224,185,115,0.03)_1px,transparent_1px)] bg-[size:22px_22px]" />
 
-        {/* Symmetrical Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {galleryImages.map((img, index) => (
             <motion.div
@@ -125,7 +123,6 @@ export default function GalleryPage() {
               }}
               className="relative overflow-hidden rounded-2xl group aspect-[4/3]"
             >
-              {/* Image */}
               <Image
                 src={img.src}
                 alt={`Gallery Image ${index + 1}`}
@@ -133,13 +130,10 @@ export default function GalleryPage() {
                 className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
 
-              {/* Gold Overlay Gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
 
-              {/* Glow Border */}
               <div className="absolute inset-0 border border-transparent group-hover:border-[#E0B973]/60 transition-all duration-700 rounded-2xl"></div>
 
-              {/* Title Overlay */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 whileHover={{ opacity: 1, y: 0 }}
@@ -155,7 +149,51 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* ✨ Bottom Accent */}
+      {/* 🎥 VIDEO GALLERY */}
+      <section
+        id="video-gallery"
+        className="py-24 px-6 lg:px-20 max-w-7xl mx-auto relative"
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+        >
+          <span className="italic">Video Gallery</span>
+        </motion.h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {galleryVideos.map((video, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="relative overflow-hidden rounded-2xl group aspect-video border border-[#1f1f1f] hover:border-[#E0B973]/60 transition-all duration-500"
+            >
+              <video
+                src={video.src}
+                className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                muted
+                loop
+                playsInline
+                onMouseEnter={(e) => e.currentTarget.play()}
+                onMouseLeave={(e) => e.currentTarget.pause()}
+              />
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
+
+              <div className="absolute bottom-6 left-6">
+                <p className="text-[#E0B973] italic text-sm font-light tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  {video.title}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto opacity-50 mb-20" />
 
       <Footer />

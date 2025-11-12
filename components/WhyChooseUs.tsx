@@ -66,7 +66,7 @@ export default function WhyChooseGAG() {
           transition={{ duration: 0.8 }}
           className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
-          Why Choose GAG Developments
+          Why Choose GAG
         </motion.h2>
 
         {/* 🏙️ Intro Row */}

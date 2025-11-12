@@ -22,7 +22,7 @@ export default function ContactPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/contact-bg.jpg"
             alt="Contact Global Architizer Group"
             fill
             priority
