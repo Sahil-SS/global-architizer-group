@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 import { ChevronDown, Download } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -23,7 +22,7 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="bg-[#0A0A0A] text-white">
+    <main className="bg-[#0A0A0A] text-white font-poppins">
       <Navbar />
 
       {/* 🌆 HERO SECTION */}
@@ -44,7 +43,7 @@ export default function AboutPage() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="relative z-10 px-6"
         >
-          <h1 className="text-4xl md:text-6xl font-semibold text-[#E0B973] mb-6 uppercase tracking-wide">
+          <h1 className="font-playfair text-4xl md:text-6xl font-semibold text-[#E0B973] mb-6 uppercase tracking-wide">
             About Global Architizer Group
           </h1>
 
@@ -52,7 +51,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-gray-300 max-w-2xl mx-auto text-lg md:text-xl leading-relaxed font-light"
+            className="text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed font-light text-justify"
           >
             Redefining luxury through timeless architecture, innovative design,
             and master craftsmanship — our legacy lies in every detail we
@@ -79,7 +78,7 @@ export default function AboutPage() {
           transition={{ duration: 1 }}
           className="max-w-5xl mx-auto"
         >
-          <div className="space-y-8 text-gray-300 text-lg md:text-xl leading-8 font-light text-justify">
+          <div className="space-y-8 text-gray-300 text-base md:text-lg leading-relaxed font-light text-justify">
             <p>
               At{" "}
               <span className="text-[#E0B973] font-medium">
@@ -134,7 +133,7 @@ export default function AboutPage() {
 
       {/* 📊 METRICS */}
       <section className="relative py-24 bg-[#0A0A0A]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#E0B973]/10 to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#E0B973]/5 to-transparent opacity-70 pointer-events-none"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -150,10 +149,10 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: i * 0.2 }}
               className="relative flex flex-col items-center justify-center"
             >
-              <h3 className="text-[#E0B973] text-6xl md:text-7xl font-semibold drop-shadow-[0_0_10px_rgba(224,185,115,0.3)]">
+              <h3 className="font-playfair text-[#E0B973] text-6xl md:text-7xl font-semibold drop-shadow-[0_0_10px_rgba(224,185,115,0.3)]">
                 {metric.number}
               </h3>
-              <p className="text-gray-400 text-sm uppercase tracking-[0.3em] mt-4">
+              <p className="text-gray-400 text-xs md:text-sm uppercase tracking-[0.3em] mt-4">
                 {metric.label}
               </p>
             </motion.div>
@@ -167,7 +166,7 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
         >
           Our Leadership
         </motion.h2>
@@ -194,12 +193,12 @@ export default function AboutPage() {
             transition={{ duration: 1 }}
             className="flex-1 text-justify space-y-6"
           >
-            <p className="text-[#E0B973] italic text-lg md:text-xl leading-relaxed">
+            <p className="font-playfair text-[#E0B973] italic text-lg md:text-xl leading-relaxed">
               “The function of leadership is to produce more leaders, not more
               followers.”
             </p>
 
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed">
               At{" "}
               <span className="text-[#E0B973] font-semibold">
                 GAG Developments
@@ -209,25 +208,12 @@ export default function AboutPage() {
               through strategic insight, innovation, and relentless execution.
             </p>
 
-            <p className="text-gray-400 text-lg leading-relaxed">
+            <p className="text-gray-400 text-base md:text-lg leading-relaxed">
               Through a client-first approach, we empower individuals and
               businesses to navigate the evolving property landscape with
               confidence. Every project we undertake reflects our promise of
               precision, creativity, and enduring value.
             </p>
-
-            {/* <div className="pt-10">
-              <Image
-                src="/signature.png"
-                alt="Signature"
-                width={160}
-                height={50}
-                className="opacity-80"
-              />
-              <p className="text-sm text-gray-500 mt-2 tracking-widest">
-                — Founder, Global Architizer Group
-              </p>
-            </div> */}
           </motion.div>
         </div>
       </section>
