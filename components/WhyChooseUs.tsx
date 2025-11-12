@@ -9,33 +9,33 @@ export default function WhyChooseGAG() {
   const features = [
     {
       icon: <Ruler className="w-8 h-8 text-[#E0B973]" />,
-      title: "Project Planning & Designing",
-      desc: "Innovative and detailed project designs balancing functionality with elegance, tailored to client requirements.",
+      title: "Architectural Design & Planning",
+      desc: "Tailored architectural concepts that blend innovation, aesthetics, and functionality to create timeless spaces.",
     },
     {
       icon: <Hammer className="w-8 h-8 text-[#E0B973]" />,
-      title: "Constructions",
-      desc: "From foundation to finish, we deliver quality craftsmanship, structural integrity, and timely delivery.",
+      title: "Turnkey Construction Solutions",
+      desc: "Comprehensive, start-to-finish construction management ensuring precision, efficiency, and luxury craftsmanship.",
     },
     {
       icon: <Home className="w-8 h-8 text-[#E0B973]" />,
-      title: "Interior & Exterior Fit Out",
-      desc: "We create refined, luxurious spaces that merge form with function across residential and commercial projects.",
+      title: "Interior Architecture & Styling",
+      desc: "Elegant interiors that harmonize materials, light, and space — designed to reflect your individuality and sophistication.",
     },
     {
       icon: <Layers className="w-8 h-8 text-[#E0B973]" />,
-      title: "Glass & ACP Façade Design",
-      desc: "Our modern façades redefine aesthetics — combining design brilliance with long-lasting performance.",
+      title: "Façade Engineering & Design",
+      desc: "Distinctive façades that elevate identity — crafted with advanced materials and sustainable technologies.",
     },
     {
       icon: <Box className="w-8 h-8 text-[#E0B973]" />,
-      title: "3D Rendering",
-      desc: "We visualize your ideas with photorealistic precision before construction even begins.",
+      title: "3D Visualization & Virtual Walkthroughs",
+      desc: "Immersive 3D renders and walkthroughs that let you experience your project before it’s built, in photo-realistic detail.",
     },
     {
       icon: <Wrench className="w-8 h-8 text-[#E0B973]" />,
-      title: "MEP Services",
-      desc: "Efficient, compliant Mechanical, Electrical, and Plumbing systems for world-class infrastructure.",
+      title: "Engineering & Technical Services",
+      desc: "Integrated MEP, structural, and technical design solutions that ensure performance, safety, and long-term value.",
     },
   ];
 
@@ -67,6 +67,7 @@ export default function WhyChooseGAG() {
           className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
           Why Choose GAG
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mb-6 mt-3 opacity-70" />
         </motion.h2>
 
         {/* 🏙️ Intro Row */}

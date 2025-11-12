@@ -32,14 +32,14 @@ export default function GalleryPage() {
   };
 
   return (
-    <main className="bg-[#0A0A0A] text-white overflow-hidden">
+    <main className="bg-[#0A0A0A] text-white font-poppins overflow-hidden">
       <Navbar />
 
       {/* 🌆 HERO SECTION */}
       <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/pic2.jpg"
             alt="Gallery Hero"
             fill
             priority
@@ -51,7 +51,7 @@ export default function GalleryPage() {
         <div className="absolute inset-0 bg-gradient-to-tr from-[#E0B973]/10 via-transparent to-transparent" />
         <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent" />
 
-        <div className="relative z-10 px-6">
+        <div className="relative z-10 px-6 mt-10">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,7 +65,7 @@ export default function GalleryPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
+            className="font-playfair text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
           >
             <span className="text-gray-200">Where Vision Meets</span> <br />
             <span className="text-[#E0B973]">Architectural Brilliance</span>
@@ -75,9 +75,9 @@ export default function GalleryPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-justify"
           >
-            Discover timeless spaces that merge creativity and structure — a
+            Discover timeless spaces that merge creativity and structure, a
             symphony of luxury, precision, and emotion.
           </motion.p>
         </div>
@@ -102,7 +102,7 @@ export default function GalleryPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
         >
           <span className="italic">Photo Gallery</span>
         </motion.h2>
@@ -158,7 +158,7 @@ export default function GalleryPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
         >
           <span className="italic">Video Gallery</span>
         </motion.h2>

@@ -48,7 +48,11 @@ export default function ExpertiseSection() {
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   return (
@@ -62,6 +66,7 @@ export default function ExpertiseSection() {
           className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
           Our Expertise
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mb-6 mt-3 opacity-70" />
         </motion.h2>
 
         {/* Expertise Cards */}

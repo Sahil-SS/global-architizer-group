@@ -45,14 +45,14 @@ export default function PortfolioPage() {
   };
 
   return (
-    <main className="bg-[#0A0A0A] text-white">
+    <main className="bg-[#0A0A0A] text-white font-poppins">
       <Navbar />
 
       {/* 🌆 HERO SECTION */}
       <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
         {/* Background Image */}
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/portfolio-bg.jpg"
           alt="BNW Developments Portfolio"
           fill
           className="object-cover opacity-80"
@@ -80,9 +80,10 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
+            className="font-playfair text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
           >
-            Our Portfolio of <br />
+            Our Portfolio of{" "}
+            <br/>
             <span className="text-[#E0B973]">Visionary Developments</span>
           </motion.h1>
 
@@ -113,21 +114,23 @@ export default function PortfolioPage() {
       {/* 🏗 INTRO TEXT */}
       <section
         id="intro-section"
-        className="pt-4 pb-20 px-6 lg:px-20 text-center max-w-5xl mx-auto"
+        className="pt-4 pb-20 px-6 lg:px-20 text-justify max-w-5xl mx-auto"
       >
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-gray-300 text-lg leading-relaxed"
+          className="text-gray-300 text-lg leading-relaxed tracking-wide"
         >
           At{" "}
-          <span className="text-[#E0B973]">BNW Real Estate Developments</span>,
-          we are focused on transforming visionary concepts into reality. With a
-          steadfast commitment to innovation and excellence, we specialize in
-          creating exceptional properties that stand out in the market, priding
-          ourselves on high-end luxury projects that shape the future of Ras Al
-          Khaimah and Dubai.
+          <span className="text-[#E0B973] font-medium">
+            BNW Real Estate Developments
+          </span>
+          , we are focused on transforming visionary concepts into reality. With
+          a steadfast commitment to innovation and excellence, we specialize in
+          creating exceptional properties that stand out in the market,
+          priding ourselves on high-end luxury projects that shape the future of
+          Ras Al Khaimah and Dubai.
           <br />
           <br />
           In addition to our development capabilities, we offer strategic
@@ -153,20 +156,13 @@ export default function PortfolioPage() {
               transition={{ type: "spring", stiffness: 200, damping: 12 }}
               className="relative flex flex-col items-center md:items-start"
             >
-              {/* Metric Number */}
-              <h3 className="text-[#E0B973] text-5xl md:text-6xl font-semibold mb-2 tracking-tight">
+              <h3 className="font-playfair text-[#E0B973] text-5xl md:text-6xl font-semibold mb-2 tracking-tight">
                 {metric.number}
               </h3>
-
-              {/* Thin Gold Underline */}
               <div className="w-12 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mb-3 opacity-70" />
-
-              {/* Label */}
               <p className="text-gray-400 text-xs md:text-sm uppercase tracking-[0.2em]">
                 {metric.label}
               </p>
-
-              {/* Divider Line Between Items */}
               {index !== metrics.length - 1 && (
                 <div className="hidden md:block absolute right-[-40px] top-1/2 -translate-y-1/2 w-px h-12 bg-[#2a2a2a]" />
               )}
@@ -174,7 +170,6 @@ export default function PortfolioPage() {
           ))}
         </motion.div>
 
-        {/* Bottom Accent Line */}
         <div className="mt-12 mx-auto w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973]/80 to-transparent opacity-60" />
       </section>
 
@@ -184,7 +179,7 @@ export default function PortfolioPage() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-[#E0B973] text-3xl font-semibold uppercase text-center mb-12"
+          className="font-playfair text-[#E0B973] text-3xl font-semibold uppercase text-center mb-12"
         >
           Featured Developments
         </motion.h2>
@@ -209,11 +204,11 @@ export default function PortfolioPage() {
               </div>
 
               <div className="mt-8 max-w-3xl">
-                <h3 className="text-2xl text-[#E0B973] font-semibold mb-2 uppercase">
+                <h3 className="font-playfair text-2xl text-[#E0B973] font-semibold mb-2 uppercase">
                   {project.title}
                 </h3>
                 <p className="text-gray-500 italic mb-3">{project.location}</p>
-                <p className="text-gray-300 leading-relaxed text-base">
+                <p className="text-gray-300 leading-relaxed text-base text-justify">
                   {project.desc}
                 </p>
               </div>

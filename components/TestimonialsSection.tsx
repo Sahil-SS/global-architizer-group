@@ -57,6 +57,7 @@ export default function TestimonialsSection() {
           <h2 className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase mb-4">
             What Our Clients Say
           </h2>
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mb-6 mt-3 opacity-70" />
           <p className="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Discover why our clients trust us to bring their visions to life —
             from luxury residences to landmark developments.

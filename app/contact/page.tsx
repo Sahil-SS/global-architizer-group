@@ -14,7 +14,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="bg-[#0A0A0A] text-white">
+    <main className="bg-[#0A0A0A] text-white font-poppins">
       <Navbar />
 
       {/* 🌆 HERO SECTION */}
@@ -53,7 +53,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
+            className="font-playfair text-4xl md:text-6xl font-semibold uppercase leading-tight mb-6"
           >
             Get in Touch With <br />
             <span className="text-[#E0B973]">Global Architizer Group</span>
@@ -64,7 +64,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-justify"
           >
             Whether you’re a client, partner, or investor — our team is here to
             help you turn ideas into reality. Reach out today and start your
@@ -100,7 +100,7 @@ export default function ContactPage() {
             transition={{ duration: 1 }}
             className="bg-[#0A0A0A]/60 p-10 rounded-2xl shadow-[0_0_20px_rgba(224,185,115,0.08)] border border-[#1f1f1f] backdrop-blur-sm"
           >
-            <h2 className="text-[#E0B973] text-3xl font-semibold uppercase mb-10 text-center">
+            <h2 className="font-playfair text-[#E0B973] text-3xl font-semibold uppercase mb-10 text-center">
               Send Us an Inquiry
             </h2>
 
@@ -160,13 +160,13 @@ export default function ContactPage() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <h2 className="text-[#E0B973] text-3xl font-semibold uppercase mb-8 text-center lg:text-left">
+            <h2 className="font-playfair text-[#E0B973] text-3xl font-semibold uppercase mb-8 text-center lg:text-left">
               Our Offices
             </h2>
 
-            <div className="space-y-8 text-gray-300 leading-relaxed">
+            <div className="space-y-8 text-gray-300 leading-relaxed text-justify">
               <div>
-                <h3 className="text-lg text-[#E0B973] mb-1 font-medium">
+                <h3 className="font-playfair text-lg text-[#E0B973] mb-1 font-medium">
                   Kolkata
                 </h3>
                 <p className="text-sm">
@@ -177,17 +177,16 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h3 className="text-lg text-[#E0B973] mb-1 font-medium">
+                <h3 className="font-playfair text-lg text-[#E0B973] mb-1 font-medium">
                   Patna
                 </h3>
                 <p className="text-sm">
-                  401, 4th Floor, Sai Tower, New Dak Bungalow Road, Patna -
-                  800001
+                  401, 4th Floor, Sai Tower, New Dak Bungalow Road, Patna - 800001
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg text-[#E0B973] mb-1 font-medium">
+                <h3 className="font-playfair text-lg text-[#E0B973] mb-1 font-medium">
                   Howrah
                 </h3>
                 <p className="text-sm">
@@ -201,8 +200,8 @@ export default function ContactPage() {
                   info@globalarchitizergroup.com
                 </p>
                 <p className="text-sm mt-1">
-                  <span className="text-[#E0B973] font-medium">Phone:</span> +91
-                  84 369 69 369 | +91 97 4864 9999
+                  <span className="text-[#E0B973] font-medium">Phone:</span>{" "}
+                  +91 84 369 69 369 | +91 97 4864 9999
                 </p>
               </div>
             </div>

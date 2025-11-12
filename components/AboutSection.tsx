@@ -42,7 +42,9 @@ export default function AboutSection() {
           className="text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
           About Us
+          <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto mb-6 mt-3 opacity-70" />
         </motion.h2>
+        
 
         {/* 🧱 Main Content */}
         <div className="flex flex-col lg:flex-row items-center gap-16">
