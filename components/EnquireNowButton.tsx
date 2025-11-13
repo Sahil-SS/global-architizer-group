@@ -22,18 +22,21 @@ export default function EnquireNowButton() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // ✅ Web3Forms Submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
 
     try {
       const payload = new FormData();
+      payload.append("access_key", "1451740e-965b-41de-b42d-eed139082b34");
+      payload.append("subject", "New Enquiry - Global Architizer Group");
+      payload.append("from_name", "Enquiry Panel");
+
       payload.append("name", formData.name);
       payload.append("email", formData.email);
       payload.append("phone", formData.phone);
       payload.append("message", formData.message);
-      payload.append("access_key", "2756ba83-599a-443a-b5a1-1871d615f0db");
-      payload.append("subject", "New Enquiry - Global Architizer Group");
 
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -41,9 +44,11 @@ export default function EnquireNowButton() {
       });
 
       const result = await res.json();
+
       if (result.success) {
         setStatus("success");
         setFormData({ name: "", email: "", phone: "", message: "" });
+
         setTimeout(() => {
           setIsOpen(false);
           setStatus("idle");
@@ -51,7 +56,8 @@ export default function EnquireNowButton() {
       } else {
         setStatus("error");
       }
-    } catch {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
       setStatus("error");
     }
   };
@@ -85,7 +91,7 @@ export default function EnquireNowButton() {
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
             />
 
-            {/* Panel */}
+            {/* Sliding Panel */}
             <motion.div
               initial={{ opacity: 0, x: 300 }}
               animate={{ opacity: 1, x: 0 }}
@@ -114,7 +120,7 @@ export default function EnquireNowButton() {
 
                 {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  {[
+                  {[ 
                     {
                       label: "Full Name",
                       name: "name",
@@ -181,7 +187,7 @@ export default function EnquireNowButton() {
                     </div>
                   </div>
 
-                  {/* Submit */}
+                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={status === "loading"}
@@ -190,6 +196,7 @@ export default function EnquireNowButton() {
                     {status === "loading" ? "Sending..." : "Submit Enquiry"}
                   </button>
 
+                  {/* Status Messages */}
                   {status === "success" && (
                     <motion.p
                       initial={{ opacity: 0, y: -5 }}
@@ -199,6 +206,7 @@ export default function EnquireNowButton() {
                       ✅ Enquiry submitted successfully!
                     </motion.p>
                   )}
+
                   {status === "error" && (
                     <motion.p
                       initial={{ opacity: 0, y: -5 }}
@@ -210,13 +218,14 @@ export default function EnquireNowButton() {
                   )}
                 </form>
 
+                {/* Footer Contact Info */}
                 <div className="mt-8 border-t border-[#2a2a2a] pt-4 text-xs text-gray-500">
                   Email:{" "}
                   <a
-                    href="mailto:info@globalarchitizergroup.com"
+                    href="mailto:globalarchitizergroup@gmail.com"
                     className="text-[#E0B973] hover:underline ml-1"
                   >
-                    info@globalarchitizergroup.com
+                    globalarchitizergroup@gmail.com
                   </a>
                 </div>
               </div>

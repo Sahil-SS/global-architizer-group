@@ -6,11 +6,72 @@ import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function ContactPage() {
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
   const scrollToForm = () => {
     const section = document.getElementById("contact-form");
     if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // 🌐 Web3Forms Submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      const payload = new FormData();
+      payload.append("access_key", "1451740e-965b-41de-b42d-eed139082b34");
+      payload.append(
+        "subject",
+        "New Contact Inquiry - Global Architizer Group"
+      );
+
+      payload.append("name", formData.name);
+      payload.append("email", formData.email);
+      payload.append("phone", formData.phone);
+      payload.append("message", formData.message);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: payload,
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setStatus("success");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+
+        setTimeout(() => setStatus("idle"), 3000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      setStatus("error");
+    }
   };
 
   return (
@@ -19,7 +80,6 @@ export default function ContactPage() {
 
       {/* 🌆 HERO SECTION */}
       <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src="/images/contact-bg.jpg"
@@ -30,15 +90,10 @@ export default function ContactPage() {
           />
         </div>
 
-        {/* Overlay */}
         <div className="absolute inset-0 bg-black/60"></div>
-
-        {/* Bottom Fade */}
         <div className="absolute bottom-0 left-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent pointer-events-none"></div>
 
-        {/* Text Content */}
         <div className="relative z-10 px-6">
-          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -48,7 +103,6 @@ export default function ContactPage() {
             Let’s Build Something Extraordinary
           </motion.p>
 
-          {/* Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -59,7 +113,6 @@ export default function ContactPage() {
             <span className="text-[#E0B973]">Global Architizer Group</span>
           </motion.h1>
 
-          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +125,6 @@ export default function ContactPage() {
           </motion.p>
         </div>
 
-        {/* Animated Scroll Arrow */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
@@ -89,11 +141,10 @@ export default function ContactPage() {
         id="contact-form"
         className="py-24 px-6 lg:px-20 relative overflow-hidden"
       >
-        {/* Background Accent */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#121212] to-[#0A0A0A]" />
 
         <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* 📝 LEFT SIDE: Elegant Form */}
+          {/* 📝 LEFT SIDE FORM */}
           <motion.div
             initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -104,56 +155,94 @@ export default function ContactPage() {
               Send Us an Inquiry
             </h2>
 
-            <form className="space-y-8">
-              {[
-                { label: "Full Name", type: "text", placeholder: "Your Name" },
-                {
-                  label: "Email Address",
-                  type: "email",
-                  placeholder: "you@example.com",
-                },
-                {
-                  label: "Phone Number",
-                  type: "text",
-                  placeholder: "+91 98765 43210",
-                },
-              ].map((input, i) => (
-                <div key={i} className="relative">
-                  <label className="block text-sm text-gray-400 mb-2">
-                    {input.label}
-                  </label>
-                  <input
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] transition-all placeholder-gray-500"
-                  />
-                </div>
-              ))}
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] placeholder-gray-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="you@example.com"
+                  className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] placeholder-gray-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-2">
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  required
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+91 98765 43210"
+                  className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] placeholder-gray-500"
+                />
+              </div>
 
               <div>
                 <label className="block text-sm text-gray-400 mb-2">
                   Message
                 </label>
                 <textarea
+                  name="message"
+                  required
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Your Message"
                   rows={4}
-                  className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] transition-all placeholder-gray-500 resize-none"
+                  className="w-full p-3 bg-transparent border-b border-[#2a2a2a] text-gray-200 focus:outline-none focus:border-[#E0B973] placeholder-gray-500 resize-none"
                 ></textarea>
               </div>
 
+              {/* Submit */}
               <div className="text-center">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
-                  className="mt-6 px-10 py-3 border border-[#E0B973] text-[#E0B973] uppercase tracking-wider rounded-full hover:bg-[#E0B973] hover:text-black transition-all duration-300"
+                  disabled={status === "loading"}
+                  className="mt-6 px-10 py-3 border border-[#E0B973] text-[#E0B973] uppercase tracking-wider rounded-full hover:bg-[#E0B973] hover:text-black transition duration-300 disabled:opacity-50"
                 >
-                  Submit Inquiry
+                  {status === "loading" ? "Sending..." : "Submit Inquiry"}
                 </motion.button>
+
+                {status === "success" && (
+                  <p className="text-green-400 text-sm mt-3">
+                    ✅ Inquiry sent successfully!
+                  </p>
+                )}
+
+                {status === "error" && (
+                  <p className="text-red-400 text-sm mt-3">
+                    ❌ Something went wrong. Try again.
+                  </p>
+                )}
               </div>
             </form>
           </motion.div>
 
-          {/* 🏢 RIGHT SIDE: Office Info + Map */}
+          {/* RIGHT SIDE CONTENT (unchanged) */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -170,9 +259,7 @@ export default function ContactPage() {
                   Kolkata
                 </h3>
                 <p className="text-sm">
-                  RDB Boulevard, Salt Lake, Sec V, Kolkata - 700091
-                  <br />
-                  356, Jodhpur Park, Jadavpur, Kolkata - 700068
+                  # 356, Ground Floor, Jodhpur Park, Kolkata - 700068
                 </p>
               </div>
 
@@ -181,7 +268,8 @@ export default function ContactPage() {
                   Patna
                 </h3>
                 <p className="text-sm">
-                  401, 4th Floor, Sai Tower, New Dak Bungalow Road, Patna - 800001
+                  401, 4th Floor, Sai Tower, New Dak Bungalow Road, Patna -
+                  800001
                 </p>
               </div>
 
@@ -197,11 +285,11 @@ export default function ContactPage() {
               <div className="pt-2 border-t border-[#2a2a2a] mt-6">
                 <p className="text-sm">
                   <span className="text-[#E0B973] font-medium">Email:</span>{" "}
-                  info@globalarchitizergroup.com
+                  globalarchitizergroup@gmail.com
                 </p>
                 <p className="text-sm mt-1">
-                  <span className="text-[#E0B973] font-medium">Phone:</span>{" "}
-                  +91 84 369 69 369 | +91 97 4864 9999
+                  <span className="text-[#E0B973] font-medium">Phone:</span> +91
+                  8436969369 | +91 9748649999
                 </p>
               </div>
             </div>

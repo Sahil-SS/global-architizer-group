@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -8,6 +9,8 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { ChevronDown } from "lucide-react";
 
 export default function GalleryPage() {
+  const [activeVideo, setActiveVideo] = useState<string | null>(null);
+
   const galleryImages = [
     { src: "/images/gallery1.jpg" },
     { src: "/images/gallery2.jpg" },
@@ -21,7 +24,7 @@ export default function GalleryPage() {
   ];
 
   const galleryVideos = [
-    { src: "/videos/gallery1.mp4", title: "Luxury Villa" },
+    { src: "/videos/banner.mp4", title: "Luxury Villa" },
     { src: "/videos/gallery2.mp4", title: "Modern Office Space" },
     { src: "/videos/gallery3.mp4", title: "Architectural Showcase" },
   ];
@@ -35,20 +38,18 @@ export default function GalleryPage() {
     <main className="bg-[#0A0A0A] text-white font-poppins overflow-hidden">
       <Navbar />
 
-      {/* 🌆 HERO SECTION */}
+      {/* HERO */}
       <section className="relative h-[100vh] flex flex-col items-center justify-center text-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/pic2.jpg"
-            alt="Gallery Hero"
-            fill
-            priority
-            className="object-cover opacity-80"
-          />
-        </div>
+        <Image
+          src="/images/pic2.jpg"
+          alt="Gallery Hero"
+          fill
+          priority
+          className="object-cover opacity-80"
+        />
 
         <div className="absolute inset-0 bg-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#E0B973]/10 via-transparent to-transparent" />
+
         <div className="absolute bottom-0 w-full h-48 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-transparent" />
 
         <div className="relative z-10 px-6 mt-10">
@@ -77,7 +78,7 @@ export default function GalleryPage() {
             transition={{ delay: 0.8, duration: 1 }}
             className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-justify"
           >
-            Discover timeless spaces that merge creativity and structure, a
+            Discover timeless spaces that merge creativity and structure — a
             symphony of luxury, precision, and emotion.
           </motion.p>
         </div>
@@ -86,103 +87,72 @@ export default function GalleryPage() {
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 1.5 }}
           onClick={scrollToGallery}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer z-10 group"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 cursor-pointer z-10"
         >
-          <ChevronDown className="text-[#E0B973] w-10 h-10 group-hover:text-[#ffd67e] transition-colors duration-300" />
-          <div className="w-8 h-[1px] bg-gradient-to-r from-transparent via-[#E0B973]/70 to-transparent mt-2 mx-auto opacity-70 group-hover:opacity-100 transition-opacity" />
+          <ChevronDown className="text-[#E0B973] w-10 h-10" />
         </motion.div>
       </section>
 
-      {/* 🖼️ PHOTO GALLERY */}
-      <section
-        id="photo-gallery"
-        className="py-24 px-6 lg:px-20 max-w-7xl mx-auto relative"
-      >
+      {/* PHOTO GALLERY */}
+      <section id="photo-gallery" className="py-24 px-6 lg:px-20 max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
           <span className="italic">Photo Gallery</span>
         </motion.h2>
 
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(224,185,115,0.03)_1px,transparent_1px)] bg-[size:22px_22px]" />
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryImages.map((img, index) => (
+          {galleryImages.map((img, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.05,
-                type: "spring",
-                stiffness: 120,
-              }}
-              className="relative overflow-hidden rounded-2xl group aspect-[4/3]"
+              transition={{ duration: 0.6, delay: i * 0.05 }}
+              className="relative overflow-hidden rounded-2xl aspect-[4/3] group"
             >
               <Image
                 src={img.src}
-                alt={`Gallery Image ${index + 1}`}
+                alt={`Gallery Image ${i + 1}`}
                 fill
-                className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                className="object-cover group-hover:scale-110 transition-transform duration-700"
               />
-
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
-
-              <div className="absolute inset-0 border border-transparent group-hover:border-[#E0B973]/60 transition-all duration-700 rounded-2xl"></div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileHover={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="absolute bottom-6 left-6 text-left opacity-0 group-hover:opacity-100"
-              >
-                <p className="text-[#E0B973] italic text-sm tracking-wider font-light">
-                  Project {index + 1}
-                </p>
-              </motion.div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* 🎥 VIDEO GALLERY */}
-      <section
-        id="video-gallery"
-        className="py-24 px-6 lg:px-20 max-w-7xl mx-auto relative"
-      >
+      {/* VIDEO GALLERY */}
+      <section id="video-gallery" className="py-24 px-6 lg:px-20 max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16 tracking-wide"
+          className="font-playfair text-[#E0B973] text-3xl md:text-4xl font-semibold uppercase text-center mb-16"
         >
           <span className="italic">Video Gallery</span>
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryVideos.map((video, index) => (
+          {galleryVideos.map((video, i) => (
             <motion.div
-              key={index}
+              key={i}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="relative overflow-hidden rounded-2xl group aspect-video border border-[#1f1f1f] hover:border-[#E0B973]/60 transition-all duration-500"
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="relative overflow-hidden rounded-2xl aspect-video border border-[#1f1f1f] hover:border-[#E0B973]/60 transition-all duration-500 cursor-pointer"
+              onClick={() => setActiveVideo(video.src)}
             >
               <video
                 src={video.src}
-                className="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover rounded-2xl"
                 muted
-                loop
                 playsInline
-                onMouseEnter={(e) => e.currentTarget.play()}
-                onMouseLeave={(e) => e.currentTarget.pause()}
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-700"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 hover:opacity-60 transition-opacity duration-700"></div>
 
               <div className="absolute bottom-6 left-6">
                 <p className="text-[#E0B973] italic text-sm font-light tracking-wide opacity-0 group-hover:opacity-100 transition-opacity duration-700">
@@ -194,7 +164,30 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      <div className="w-24 h-[1.5px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent mx-auto opacity-50 mb-20" />
+      {/* VIDEO POPUP MODAL */}
+      {activeVideo && (
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+          onClick={() => setActiveVideo(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()} // prevent closing when clicking video
+            className="w-full max-w-4xl rounded-2xl overflow-hidden shadow-2xl border border-[#E0B973]/30"
+          >
+            <video
+              src={activeVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-auto"
+            />
+          </motion.div>
+        </div>
+      )}
 
       <Footer />
       <ScrollToTop />
