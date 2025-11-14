@@ -2,196 +2,227 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import {
+  X,
+  House,
+  Layers,
+  User,
+  Images,
+  Phone,
+  Shield,
+  Sparkles,
+  Award,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import EnquireNowButton from "@/components/EnquireNowButton"; 
 
-export default function Navbar() {
+export default function Navbar({
+  onMenuToggle = () => {}, // ✅ Default function to avoid errors
+}: {
+  onMenuToggle?: (open: boolean) => void;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [visible, setVisible] = useState(true);
 
-  // 🧠 Show navbar only when at top
+  // Show navbar when at top
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY <= 50) setVisible(true);
-      else setVisible(false);
-    };
-    handleScroll();
+    const handleScroll = () => setVisible(window.scrollY <= 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 🧩 Lock body scroll when sidebar is open
+  // Lock body + notify parent
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
-  }, [isOpen]);
+    onMenuToggle(isOpen);
+  }, [isOpen, onMenuToggle]);
 
-  const leftLinks = [
-    { name: "Home", href: "/" },
-    { name: "Portfolio", href: "/portfolio" },
-  ];
-
-  const rightLinks = [
-    { name: "About Us", href: "/about" },
-    { name: "Gallery", href: "/gallery" },
+  const sidebarLinks = [
+    { name: "Home", href: "/", icon: House },
+    { name: "Portfolio", href: "/portfolio", icon: Layers },
+    { name: "About Us", href: "/about", icon: User },
+    { name: "Gallery", href: "/gallery", icon: Images },
+    { name: "Contact Us", href: "/contact", icon: Phone },
   ];
 
   return (
     <>
-      {/* 🧭 Navbar */}
+      {/* NAVBAR */}
       <AnimatePresence>
         {visible && (
           <motion.nav
-            key="navbar"
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6 }}
             className="fixed top-0 left-0 w-full z-50 flex items-center justify-between 
-                       px-8 md:px-16 py-4 bg-transparent backdrop-blur-0 transition-all duration-500"
+                       px-6 md:px-16 py-10"
           >
-            {/* LEFT SECTION */}
-            <div className="flex-1 flex items-center justify-start gap-8">
-              {leftLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="relative text-sm uppercase tracking-widest text-gray-300 transition-all duration-300 
-                             hover:text-[#E0B973] hover:drop-shadow-[0_0_6px_#E0B973] group hidden sm:block"
-                >
-                  {link.name}
-                  <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-[#E0B973] transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              ))}
-            </div>
-
-            {/* CENTER — LOGO */}
-            <div className="flex justify-center items-center flex-shrink-0">
-              <Link href="/">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.3 }}
-                  className="cursor-pointer"
-                >
-                  <Image
-                    src="/logo.png"
-                    alt="Company Logo"
-                    width={200}
-                    height={90}
-                    priority
-                    className="object-contain"
-                  />
-                </motion.div>
-              </Link>
-            </div>
-
-            {/* RIGHT SECTION */}
-            <div className="flex-1 flex justify-end items-center gap-8">
-              {rightLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="relative text-sm uppercase tracking-widest text-gray-300 transition-all duration-300 
-                             hover:text-[#E0B973] hover:drop-shadow-[0_0_6px_#E0B973] group hidden sm:block"
-                >
-                  {link.name}
-                  <span className="absolute left-0 -bottom-1 w-0 h-[1.5px] bg-[#E0B973] transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              ))}
-
-              {/* CTA */}
+            {/* LEFT – Desktop Only */}
+            <div className="flex-1 hidden sm:flex items-center gap-8">
               <Link
-                href="/contact"
-                className="hidden md:inline-block text-sm uppercase tracking-widest px-4 py-2 border border-[#E0B973]/50 
-                           rounded-full text-[#E0B973] hover:bg-[#E0B973] hover:text-black transition-all duration-300"
+                href="/"
+                className="text-md uppercase tracking-widest text-gray-300 hover:text-[#E0B973] transition"
               >
-                Let’s Talk
+                Home
               </Link>
+              <Link
+                href="/portfolio"
+                className="text-md uppercase tracking-widest text-gray-300 hover:text-[#E0B973] transition"
+              >
+                Portfolio
+              </Link>
+            </div>
 
-              {/* Hamburger (mobile) */}
+            {/* CENTER Logo */}
+            <div className="absolute left-1/2 -translate-x-1/2 flex justify-center flex-shrink-0">
+              <Link href="/">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={180}
+                  height={80}
+                  className="object-contain"
+                />
+              </Link>
+            </div>
+
+            {/* RIGHT – Hamburger */}
+            <div className="flex-1 flex justify-end">
               <motion.button
                 onClick={() => setIsOpen(!isOpen)}
                 whileTap={{ scale: 0.9 }}
-                className="text-white focus:outline-none hover:text-[#E0B973] transition-all duration-300 md:hidden"
-                aria-label="Toggle Menu"
+                className="relative w-10 h-10 flex flex-col justify-center items-center group"
               >
-                {isOpen ? <X size={26} /> : <Menu size={26} />}
+                {/* Top line */}
+                <motion.span
+                  className="w-7 h-[2.5px] bg-white rounded-full block group-hover:bg-[#E0B973]"
+                  animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                />
+
+                {/* Middle line */}
+                <motion.span
+                  className="w-7 h-[2.5px] bg-white rounded-full mt-1 block group-hover:bg-[#E0B973]"
+                  animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                  transition={{ duration: 0.2 }}
+                />
+
+                {/* Bottom line */}
+                <motion.span
+                  className="w-7 h-[2.5px] bg-white rounded-full mt-1 block group-hover:bg-[#E0B973]"
+                  animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                />
               </motion.button>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* 🧱 Sidebar Menu (mobile) */}
+      {/* SIDEBAR */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Dark overlay */}
+            {/* BACKDROP */}
             <motion.div
-              key="overlay"
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.5 }}
+              animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-black z-40"
+              className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Sidebar */}
+            {/* SIDEBAR PANEL */}
             <motion.div
-              key="sidebar"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ type: "tween", duration: 0.4 }}
-              className="fixed top-0 right-0 h-full w-[280px] bg-[#0A0A0A] border-l border-[#2a2a2a] 
-                         z-50 flex flex-col items-start p-10 shadow-2xl"
+              transition={{ duration: 0.45 }}
+              className="fixed top-0 right-0 h-full w-[300px] 
+                         bg-[#0A0A0A]/80 backdrop-blur-xl border-l border-[#2a2a2a] 
+                         z-50 p-10 shadow-[0_0_25px_rgba(224,185,115,0.25)]"
             >
+              {/* Close Button */}
               <motion.button
                 onClick={() => setIsOpen(false)}
                 whileHover={{ rotate: 90 }}
-                className="absolute top-6 right-6 text-white hover:text-[#E0B973] transition-all duration-300"
+                className="absolute top-6 right-6 text-white hover:text-[#E0B973]"
               >
                 <X size={26} />
               </motion.button>
 
-              <div className="mt-16 space-y-8 w-full">
-                {[...leftLinks, ...rightLinks, { name: "Contact Us", href: "/contact" }].map(
-                  (item) => (
-                    <motion.div key={item.name} whileHover={{ x: 10 }} transition={{ duration: 0.3 }}>
+              {/* Sidebar Logo */}
+              <div className="flex flex-col items-center mt-4 mb-6">
+                <Image
+                  src="/logo.png"
+                  width={160}
+                  height={70}
+                  alt="Sidebar Logo"
+                  className="object-contain opacity-100"
+                />
+              </div>
+
+              {/* Divider */}
+              <div className="mb-10 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent opacity-50" />
+
+              {/* NAVLINKS */}
+              <div className="space-y-6">
+                {sidebarLinks.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
                       <Link
                         href={item.href}
                         onClick={() => setIsOpen(false)}
-                        className="block text-lg font-light text-gray-300 uppercase tracking-wide 
-                                   hover:text-[#E0B973] transition-all duration-300"
+                        className="flex items-center gap-4 text-lg text-gray-300 uppercase tracking-wide 
+                                   hover:text-[#E0B973] transition-all group"
                       >
+                        <Icon className="text-[#E0B973] group-hover:scale-110 transition" size={20} />
                         {item.name}
                       </Link>
                     </motion.div>
-                  )
-                )}
+                  );
+                })}
               </div>
 
-              <div className="mt-auto text-gray-600 text-xs tracking-widest uppercase pt-10">
+              {/* Divider 2 */}
+              <div className="my-8 w-full h-[1px] bg-gradient-to-r from-transparent via-[#E0B973] to-transparent opacity-40" />
+
+              {/* FEATURES */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="grid grid-cols-3 text-center gap-4"
+              >
+                <div>
+                  <Shield size={20} className="text-[#E0B973] mx-auto mb-1" />
+                  <p className="text-[10px] text-gray-400">Quality</p>
+                </div>
+
+                <div>
+                  <Sparkles size={20} className="text-[#E0B973] mx-auto mb-1" />
+                  <p className="text-[10px] text-gray-400">Luxury</p>
+                </div>
+
+                <div>
+                  <Award size={20} className="text-[#E0B973] mx-auto mb-1" />
+                  <p className="text-[10px] text-gray-400">Precision</p>
+                </div>
+              </motion.div>
+
+              {/* Sidebar Footer */}
+              <div className="mt-12 text-gray-600 text-[11px] uppercase tracking-wide text-center">
                 © {new Date().getFullYear()} Global Architizer Group
               </div>
             </motion.div>
           </>
-        )}
-      </AnimatePresence>
-
-      {/* 🟡 Enquire Now Button — hidden when sidebar open */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3 }}
-          >
-            <EnquireNowButton />
-          </motion.div>
         )}
       </AnimatePresence>
     </>

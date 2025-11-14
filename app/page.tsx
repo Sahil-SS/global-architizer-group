@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
 import AboutSection from '@/components/AboutSection'
-import AwardsSection from '@/components/AwardsSection'
 import ExpertiseSection from '@/components/ExpertiseSection'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
@@ -13,25 +12,24 @@ import WhyChooseUs from '@/components/WhyChooseUs'
 import EnquireNowButton from "@/components/EnquireNowButton";
 import React, { useState } from "react";
 
-const page = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar onMenuToggle={setMenuOpen} />
       <HeroSection />
-      {/* <AwardsSection /> */}
       <WhyChooseUs />
       <AboutSection />
       <ExpertiseSection />
       <PortfolioSection />
       <TestimonialsSection />
+
       <Footer />
       <ScrollToTop />
 
+      {/* Hide Enquire Button when sidebar menu is open */}
       {!menuOpen && <EnquireNowButton />}
     </>
-  )
+  );
 }
-
-export default page

@@ -17,12 +17,12 @@ export default function HeroSection() {
       {/* 🖼 Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/bg1.jpg"
           alt="Luxury Real Estate Background"
           fill
           priority
           quality={100}
-          className="object-cover object-center opacity-70"
+          className="object-cover object-center opacity-77"
         />
       </div>
 
