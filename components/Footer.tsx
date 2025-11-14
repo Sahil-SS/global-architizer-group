@@ -85,7 +85,7 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://wa.me/+918436969369"
+              href="https://wa.me/+919748649999"
               target="_blank"
               aria-label="WhatsApp"
               className="hover:scale-110 transition-transform duration-300"
